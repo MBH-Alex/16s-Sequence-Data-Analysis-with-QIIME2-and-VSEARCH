@@ -12,3 +12,33 @@ Before starting the analysis, ensure the following prerequisites are met:
 ## Running the Protocol
 ### Importing Data Into Qiime
 The importing and demultiplexing script is the initial step in the Qiime2 workflow, where raw sequencing data is imported into the Qiime2 environment and, if necessary, demultiplexed. This step converts raw sequencing files into a format that Qiime2 can work with and prepares the data for subsequent analysis steps.
+
+    #!/bin/bash
+    #SBATCH --job-name=QIIME2_import
+    #SBATCH --nodes=1
+    #SBATCH --ntasks-per-node=8
+    #SBATCH --output=%j.output.import.txt
+    #SBATCH --partition=all
+    #SBATCH --time=01:00:00
+    #SBATCH --mail-type=begin,end
+    #SBATCH --mail-user=YOUR EMAIL HERE
+    
+    module load QIIME2/2021.8
+    
+    # Import Fastq folder into demultiplexed format
+    qiime tools import \
+      --type 'SampleData[PairedEndSequencesWithQuality]' \
+      --input-path YOUR PATH TO DIRECTORY CONTAINING FILES HERE \
+      --input-format CasavaOneEightSingleLanePerSampleDirFmt \
+      --output-path demux-paired-end.qza
+    
+    # Summarize demultiplexed data
+    qiime demux summarize \
+      --i-data demux-paired-end.qza \
+      --o-visualization demux-paired-end.qzv
+#### Key Points
+* **Data Import**: The script imports raw sequencing data from FASTQ files into a Qiime2-compatible format.
+* **Demultiplexing**: If your data is multiplexed, this step would handle the separation of sequences by sample based on barcodes (not explicitly shown here as the data is assumed to be already demultiplexed).
+* **Quality Summary**: After importing, the script generates a summary of the demultiplexed data, providing insights into sequence quality, which can be reviewed using Qiime2 View (https://view.qiime2.org/).
+
+This initial step sets the foundation for subsequent analyses by ensuring that the raw data is properly formatted and summarized, enabling informed decisions for downstream processing steps.
