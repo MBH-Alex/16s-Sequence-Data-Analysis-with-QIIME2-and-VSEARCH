@@ -1,3 +1,4 @@
+## Explanation
 #!/bin/bash
 #SBATCH --job-name=QIIME2_dada2
 #SBATCH --nodes=1
