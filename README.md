@@ -42,3 +42,5 @@ The importing and demultiplexing script is the initial step in the Qiime2 workfl
 * **Quality Summary**: After importing, the script generates a summary of the demultiplexed data, providing insights into sequence quality, which can be reviewed using Qiime2 View (https://view.qiime2.org/).
 
 This initial step sets the foundation for subsequent analyses by ensuring that the raw data is properly formatted and summarized, enabling informed decisions for downstream processing steps.
+### Denoising the Samples
+The denoising script is a crucial step in the Qiime2 workflow where raw sequence data is processed to remove noise, correct errors, and generate high-quality feature tables and representative sequences. This step utilizes the DADA2 algorithm, which is well-suited for high-resolution microbiome data analysis.
