@@ -44,3 +44,46 @@ The importing and demultiplexing script is the initial step in the Qiime2 workfl
 This initial step sets the foundation for subsequent analyses by ensuring that the raw data is properly formatted and summarized, enabling informed decisions for downstream processing steps.
 ### Denoising the Samples
 The denoising script is a crucial step in the Qiime2 workflow where raw sequence data is processed to remove noise, correct errors, and generate high-quality feature tables and representative sequences. This step utilizes the DADA2 algorithm, which is well-suited for high-resolution microbiome data analysis.
+
+    #!/bin/bash
+    #SBATCH --job-name=QIIME2_dada2
+    #SBATCH --nodes=1
+    #SBATCH --ntasks-per-node=8
+    #SBATCH --output=%j.output.dada2.txt
+    #SBATCH --partition=all
+    #SBATCH --time=04:00:00
+    #SBATCH --mail-type=begin,end
+    #SBATCH --mail-user=alex.kidangathazhe@gmail.com
+    
+    module load QIIME2/2021.8
+    
+    # Denoise paired-end sequences using DADA2
+    qiime dada2 denoise-paired \
+      --i-demultiplexed-seqs demux-paired-end.qza \
+      --p-trim-left-f 21 \
+      --p-trim-left-r 10 \
+      --p-trunc-len-f 295 \
+      --p-trunc-len-r 238 \
+      --o-table table.qza \
+      --o-representative-sequences rep-seqs.qza \
+      --o-denoising-stats denoising-stats.qza \
+      --p-n-threads 0  # Use all available cores
+    
+    # Summarize denoising stats
+    qiime metadata tabulate \
+      --m-input-file denoising-stats.qza \
+      --o-visualization stats-dada2.qzv
+    
+    # Summarize feature table and tabulate sequences
+    qiime feature-table summarize \
+      --i-table table.qza \
+      --o-visualization table.qzv \
+      --m-sample-metadata-file YOUR METADATA FILE HERE
+    
+    qiime feature-table tabulate-seqs \
+      --i-data rep-seqs.qza \
+      --o-visualization rep-seqs.qzv
+#### Key Points
+* **Denoising**: The script uses DADA2 to remove noise and correct errors in paired-end sequence data, resulting in high-quality feature tables and representative sequences.
+* **Parallel Processing**: The script leverages all available cores to speed up the denoising process.
+* **Summary and Visualization**: After denoising, the script generates summaries and visualizations of the denoising statistics, feature table, and representative sequences, which can be reviewed using Qiime2 View (https://view.qiime2.org/).
