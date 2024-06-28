@@ -33,13 +33,13 @@
 * `#SBATCH --partition=batch`: This sets the partition (queue) to "batch".
 * `#SBATCH --time=01:00:00`: This sets the maximum run time to 1 hour.
 * `#SBATCH --mail-type=begin,end`: This configures email notifications to be sent at the beginning and end of the job.
-* `#SBATCH --mail-user=your_email`: This specifies the email address to send notifications to.
+* `#SBATCH --mail-user=your_email`: This specifies the email address to send notifications to. **MUST BE REPLACED WITH YOUR EMAIL TO FUNCTION**
 **2. Loading QIIME2 Module**
 * `module load QIIME2/2021.8`: This loads the QIIME2 module maintained by the cluster
 3. Importing Data
 * `qiime tools import`: This command imports data into Qiime2.
 * `--type 'SampleData[PairedEndSequencesWithQuality]'`: This specifies the type of data being imported. Here, it's paired-end sequences with quality scores.
-* `--input-path /scratch/bintamv/QIIME2/Fastq`: This specifies the path to the input directory containing the FASTQ files.
+* `--input-path YOUR DIRECOTRY HERE`: This specifies the path to the input directory containing the FASTQ files. **MUST BE REPLACED WITH THE DIRECT PATH TO YOUR DIRECTORY HERE**
 * `--input-format CasavaOneEightSingleLanePerSampleDirFmt`: This specifies the input format. In this case, the data is in the Casava 1.8 format.
 * `--output-path demux-paired-end.qza`: This specifies the output file path for the imported data in Qiime2 artifact format (.qza).
 4. Summarizing Demultiplexed Data
