@@ -54,10 +54,10 @@
 3. Denoising with DADA2
 * `qiime dada2 denoise-paired`: This command runs the DADA2 algorithm to denoise paired-end sequences.
   * `--i-demultiplexed-seqs demux-paired-end.qza`: This specifies the input file containing demultiplexed sequences.
-  * `--p-trim-left-f 21`: This trims the first 21 bases from the forward reads.
-  * `--p-trim-left-r 10`: This trims the first 10 bases from the reverse reads.
-  * `--p-trunc-len-f 295`: This truncates the forward reads to 295 bases.
-  * `--p-trunc-len-r 238`: This truncates the reverse reads to 238 bases.
+  * `--p-trim-left-f 21`: This trims the first 21 bases from the forward reads. Please import the demux.qzv file into QIIME2 to acertain what bases needed to be trimmed. 
+  * `--p-trim-left-r 10`: This trims the first 10 bases from the reverse reads. Please import the demux.qzv file into QIIME2 to acertain what bases needed to be trimmed.
+  * `--p-trunc-len-f 295`: This truncates the forward reads to 295 bases. Please import the demux.qzv file into QIIME2 to acertain what bases needed to be trimmed.
+  * `--p-trunc-len-r 238`: This truncates the reverse reads to 238 bases. Please import the demux.qzv file into QIIME2 to acertain what bases needed to be trimmed.
   * `--o-table table.qza`: This specifies the output file for the feature table.
   * `--o-representative-sequences rep-seqs.qza`: This specifies the output file for the representative sequences.
   * `--o-denoising-stats denoising-stats.qza`: This specifies the output file for the denoising statistics.
