@@ -1,4 +1,4 @@
-** Detailed Explanation of the Import Script
+## Detailed Explanation of the Import Script
 
     #!/bin/bash
     #SBATCH --job-name=QIIME2_import
@@ -23,3 +23,26 @@
     qiime demux summarize \
       --i-data demux-paired-end.qza \
       --o-visualization demux-paired-end.qzv
+### Explanation
+1. SLURM Job Configuration
+* `#!/bin/bash`: This line specifies that the script should be run in the Bash shell.
+* `#SBATCH --job-name=QIIME2_import`: This sets the name of the job to "QIIME2_import".
+* `#SBATCH --nodes=1`: This specifies that the job will use 1 node.
+* `#SBATCH --ntasks-per-node=8`: This sets the number of tasks per node to 8.
+* `#SBATCH --output=%j.output.import.txt`: This specifies the output file for the job logs, where %j is replaced with the job ID.
+* `#SBATCH --partition=batch`: This sets the partition (queue) to "batch".
+* `#SBATCH --time=01:00:00`: This sets the maximum run time to 1 hour.
+* `#SBATCH --mail-type=begin,end`: This configures email notifications to be sent at the beginning and end of the job.
+* `#SBATCH --mail-user=your_email`: This specifies the email address to send notifications to.
+**2. Loading QIIME2 Module**
+* `module load QIIME2/2021.8`: This loads the QIIME2 module maintained by the cluster
+3. Importing Data
+* `qiime tools import`: This command imports data into Qiime2.
+* `--type 'SampleData[PairedEndSequencesWithQuality]'`: This specifies the type of data being imported. Here, it's paired-end sequences with quality scores.
+* `--input-path /scratch/bintamv/QIIME2/Fastq`: This specifies the path to the input directory containing the FASTQ files.
+* `--input-format CasavaOneEightSingleLanePerSampleDirFmt`: This specifies the input format. In this case, the data is in the Casava 1.8 format.
+* `--output-path demux-paired-end.qza`: This specifies the output file path for the imported data in Qiime2 artifact format (.qza).
+4. Summarizing Demultiplexed Data
+* `qiime demux summarize`: This command generates summary statistics and visualizations for the demultiplexed data.
+* `--i-data demux-paired-end.qza`: This specifies the input file, which is the imported data from the previous step.
+* `--o-visualization demux-paired-end.qzv`: This specifies the output file for the summary visualization in Qiime2 visualization format (.qzv).
