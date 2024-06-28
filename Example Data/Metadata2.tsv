@@ -1,0 +1,145 @@
+#SampleID	Treatment	Day
+C1	Control	2
+C2	Control	2
+C3	Control	2
+C4	Control	2
+SUC1	Sucralose	2
+SUC2	Sucralose	2
+SUC3	Sucralose	2
+SUC4	Sucralose	2
+ACE1	Acesulfame K	2
+ACE2	Acesulfame K	2
+ACE3	Acesulfame K	2
+ACE4	Acesulfame K	2
+SAC1	Saccharin	2
+SAC2	Saccharin	2
+SAC3	Saccharin	2
+SAC4	Saccharin	2
+XYL1	Xylitol	2
+XYL2	Xylitol	2
+XYL3	Xylitol	2
+XYL4	Xylitol	2
+REB1	Rebaudioside A	2
+REB2	Rebaudioside A	2
+REB3	Rebaudioside A	2
+REB4	Rebaudioside A	2
+D7C1	Control	7
+D7C2	Control	7
+D7C3	Control	7
+D7C4	Control	7
+D7SUC1	Sucralose	7
+D7SUC2	Sucralose	7
+D7SUC3	Sucralose	7
+D7SUC4	Sucralose	7
+D7ACE1	Acesulfame K	7
+D7ACE2	Acesulfame K	7
+D7ACE3	Acesulfame K	7
+D7ACE4	Acesulfame K	7
+D7SAC1	Saccharin	7
+D7SAC2	Saccharin	7
+D7SAC3	Saccharin	7
+D7SAC4	Saccharin	7
+D7XYL1	Xylitol	7
+D7XYL2	Xylitol	7
+D7XYL3	Xylitol	7
+D7XYL4	Xylitol	7
+D7REB1	Rebaudioside A	7
+D7REB2	Rebaudioside A	7
+D7REB3	Rebaudioside A	7
+D7REB4	Rebaudioside A	7
+D14C1	Control	14
+D14C2	Control	14
+D14C3	Control	14
+D14C4	Control	14
+D14SUC1	Sucralose	14
+D14SUC2	Sucralose	14
+D14SUC3	Sucralose	14
+D14SUC4	Sucralose	14
+D14ACE1	Acesulfame K	14
+D14ACE2	Acesulfame K	14
+D14ACE3	Acesulfame K	14
+D14ACE4	Acesulfame K	14
+D14SAC1	Saccharin	14
+D14SAC2	Saccharin	14
+D14SAC3	Saccharin	14
+D14SAC4	Saccharin	14
+D14XYL1	Xylitol	14
+D14XYL2	Xylitol	14
+D14XYL3	Xylitol	14
+D14XYL4	Xylitol	14
+D14REB1	Rebaudioside A	14
+D14REB2	Rebaudioside A	14
+D14REB3	Rebaudioside A	14
+D14REB4	Rebaudioside A	14
+D21C1	Control	21
+D21C2	Control	21
+D21C3	Control	21
+D21C4	Control	21
+D21SUC1	Sucralose	21
+D21SUC2	Sucralose	21
+D21SUC3	Sucralose	21
+D21SUC4	Sucralose	21
+D21ACE1	Acesulfame K	21
+D21ACE2	Acesulfame K	21
+D21ACE3	Acesulfame K	21
+D21ACE4	Acesulfame K	21
+D21SAC1	Saccharin	21
+D21SAC2	Saccharin	21
+D21SAC3	Saccharin	21
+D21SAC4	Saccharin	21
+D21XYL1	Xylitol	21
+D21XYL2	Xylitol	21
+D21XYL3	Xylitol	21
+D21XYL4	Xylitol	21
+D21REB1	Rebaudioside A	21
+D21REB2	Rebaudioside A	21
+D21REB3	Rebaudioside A	21
+D21REB4	Rebaudioside A	21
+D28C1	Control	28
+D28C2	Control	28
+D28C3	Control	28
+D28C4	Control	28
+D28SUC1	Sucralose	28
+D28SUC2	Sucralose	28
+D28SUC3	Sucralose	28
+D28SUC4	Sucralose	28
+D28ACE1	Acesulfame K	28
+D28ACE2	Acesulfame K	28
+D28ACE3	Acesulfame K	28
+D28ACE4	Acesulfame K	28
+D28SAC1	Saccharin	28
+D28SAC2	Saccharin	28
+D28SAC3	Saccharin	28
+D28SAC4	Saccharin	28
+D28XYL1	Xylitol	28
+D28XYL2	Xylitol	28
+D28XYL3	Xylitol	28
+D28XYL4	Xylitol	28
+D28REB1	Rebaudioside A	28
+D28REB2	Rebaudioside A	28
+D28REB3	Rebaudioside A	28
+D28REB4	Rebaudioside A	28
+D35C1	Control	35
+D35C2	Control	35
+D35C3	Control	35
+D35C4	Control	35
+D35SUC1	Sucralose	35
+D35SUC2	Sucralose	35
+D35SUC3	Sucralose	35
+D35SUC4	Sucralose	35
+D35ACE1	Acesulfame K	35
+D35ACE2	Acesulfame K	35
+D35ACE3	Acesulfame K	35
+D35ACE4	Acesulfame K	35
+D35SAC1	Saccharin	35
+D35SAC2	Saccharin	35
+D35SAC3	Saccharin	35
+D35SAC4	Saccharin	35
+D35XYL1	Xylitol	35
+D35XYL2	Xylitol	35
+D35XYL3	Xylitol	35
+D35XYL4	Xylitol	35
+D35REB1	Rebaudioside A	35
+D35REB2	Rebaudioside A	35
+D35REB3	Rebaudioside A	35
+D35REB4	Rebaudioside A	35
