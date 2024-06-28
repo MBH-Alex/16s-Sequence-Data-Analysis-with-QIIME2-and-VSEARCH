@@ -33,7 +33,7 @@
     qiime feature-table summarize \
       --i-table table.qza \
       --o-visualization table.qzv \
-      --m-sample-metadata-file Metadata.txt
+      --m-sample-metadata-file YOUR METADATA FILE HERE
     
     qiime feature-table tabulate-seqs \
       --i-data rep-seqs.qza \
@@ -70,7 +70,7 @@
 * `qiime feature-table summarize`: This command generates a summary of the feature table.
   * `--i-table table.qza`: This specifies the input feature table file.
   * `--o-visualization table.qzv`: This specifies the output file for the feature table visualization.
-  * `--m-sample-metadata-file Metadata.txt`: This specifies the metadata file for sample mapping.
+  * `--m-sample-metadata-file YOUR METADATA FILE HERE`: This specifies the metadata file for sample mapping. **THIS MUST POINT TO A METADATA FILE THAT HAS BEEN VALIDATED BY KEEMI**
 * `qiime feature-table tabulate-seqs`: This command generates a summary of the representative sequences.
   * `--i-data rep-seqs.qza`: This specifies the input file containing representative sequences.
   * `--o-visualization rep-seqs.qzv`: This specifies the output file for the representative sequences visualization.
