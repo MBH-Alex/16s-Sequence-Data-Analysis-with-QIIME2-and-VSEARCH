@@ -40,7 +40,9 @@ The importing and demultiplexing script is the initial step in the Qiime2 workfl
 * **Data Import**: The script imports raw sequencing data from FASTQ files into a Qiime2-compatible format.
 * **Demultiplexing**: If your data is multiplexed, this step would handle the separation of sequences by sample based on barcodes (not explicitly shown here as the data is assumed to be already demultiplexed).
 * **Quality Summary**: After importing, the script generates a summary of the demultiplexed data, providing insights into sequence quality, which can be reviewed using Qiime2 View (https://view.qiime2.org/).
-
+#### Further Actions
+Once this script has run it isi imperitive that the `demux-paired-end.qzv` file is taken off the cluster and then imported innto to Qiime2 View. This will allow for the determination of the base cutoffs during denoising.
+#### Summary
 This initial step sets the foundation for subsequent analyses by ensuring that the raw data is properly formatted and summarized, enabling informed decisions for downstream processing steps.
 ### Denoising the Samples
 The denoising script is a crucial step in the Qiime2 workflow where raw sequence data is processed to remove noise, correct errors, and generate high-quality feature tables and representative sequences. This step utilizes the DADA2 algorithm, which is well-suited for high-resolution microbiome data analysis.
@@ -87,3 +89,7 @@ The denoising script is a crucial step in the Qiime2 workflow where raw sequence
 * **Denoising**: The script uses DADA2 to remove noise and correct errors in paired-end sequence data, resulting in high-quality feature tables and representative sequences.
 * **Parallel Processing**: The script leverages all available cores to speed up the denoising process.
 * **Summary and Visualization**: After denoising, the script generates summaries and visualizations of the denoising statistics, feature table, and representative sequences, which can be reviewed using Qiime2 View (https://view.qiime2.org/).
+#### Further Actions
+The `--p-trim-left-f`, `--p-trim-left-r`, `--p-trunc-len-f`, and `--p-trunc-len-r` must be changd before the script is run. By importing the `demux-paired-end.qzv` file in the Qiime2 View a quality report will be generated. The report will give a per base level of quality information that be used to set which bases will be trimmed based of the previous commands. The `--p-trim-left-f` corresponds to the left side of the forward reads while the `--p-trim-left-r` corresponds to the left side of the reverse reads. 
+#### Summary
+This step is essential for ensuring the accuracy and reliability of the downstream microbiome analyses by removing noise and correcting sequencing errors.
