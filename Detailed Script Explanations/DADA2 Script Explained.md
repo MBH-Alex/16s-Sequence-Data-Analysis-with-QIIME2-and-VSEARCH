@@ -74,3 +74,26 @@
 * `qiime feature-table tabulate-seqs`: This command generates a summary of the representative sequences.
   * `--i-data rep-seqs.qza`: This specifies the input file containing representative sequences.
   * `--o-visualization rep-seqs.qzv`: This specifies the output file for the representative sequences visualization.
+### General Comments
+As stated in the README the trimming parameters need to be changed every run, it is perfectly acceptable to run this script multiple times to get different levels of trimming. The `stats-dada2.qzv` can be used to understand what impact the trimming settings have on the amount trimmed. 
+#### `table.qzv` - Feature Table Summary
+**Purpose**: The table.qzv file is a visualization of the feature table generated during the denoising process. It provides a summary of the number of sequences per sample and the number of features (OTUs/ASVs) detected.
+
+**Contents**:
+* Sample Detail: Information about each sample, including the total number of sequences.
+* Feature Detail: Information about each feature (e.g., ASV), including its frequency across samples.
+* Interactive Plots: Visualizations such as bar plots that show the distribution of sequences across samples.
+**Usage**:
+* Assess Sequencing Depth: Verify that sequencing depth is sufficient for each sample.
+* Identify Outliers: Detect any samples with unusually high or low sequence counts.
+* Explore Feature Distribution: Understand how features are distributed across different samples.
+#### `rep-seqs.qzv` - Representative Sequences Summary
+**Purpose**: The rep-seqs.qzv file is a visualization of the representative sequences. These sequences are the actual DNA sequences that were identified as unique features (ASVs) after denoising.
+
+**Contents**:
+* Sequence Detail: Information about each representative sequence, including its length and sequence.
+* Interactive Tables: Tables listing each representative sequence along with its frequency in the dataset.
+**Usage**:
+* Sequence Verification: Review the actual sequences identified as features.
+* Feature Analysis: Examine the length and composition of representative sequences.
+* Downstream Analysis: Use the representative sequences for further analyses, such as taxonomy assignment or phylogenetic tree construction.
