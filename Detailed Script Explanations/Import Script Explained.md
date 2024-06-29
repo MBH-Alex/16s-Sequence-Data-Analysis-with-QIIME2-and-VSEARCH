@@ -46,3 +46,5 @@
 * `qiime demux summarize`: This command generates summary statistics and visualizations for the demultiplexed data.
 * `--i-data demux-paired-end.qza`: This specifies the input file, which is the imported data from the previous step.
 * `--o-visualization demux-paired-end.qzv`: This specifies the output file for the summary visualization in Qiime2 visualization format (.qzv).
+### General Comments
+As mentioned in the README it is crucial that the `demux-paired-end.qzv` is taken off the cluster and viewed in Qiime2 View to properly set the trimming parameter in the next step. If this step causes errors check the directory containing the samples as well as the input format of your samples. 
