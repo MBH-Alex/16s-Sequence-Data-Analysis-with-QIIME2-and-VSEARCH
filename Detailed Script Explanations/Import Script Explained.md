@@ -34,7 +34,7 @@
 * `#SBATCH --time=01:00:00`: This sets the maximum run time to 1 hour.
 * `#SBATCH --mail-type=begin,end`: This configures email notifications to be sent at the beginning and end of the job.
 * `#SBATCH --mail-user=your_email`: This specifies the email address to send notifications to. **MUST BE REPLACED WITH YOUR EMAIL TO FUNCTION**
-**2. Loading QIIME2 Module**
+2. Loading QIIME2 Module
 * `module load QIIME2/2021.8`: This loads the QIIME2 module maintained by the cluster
 3. Importing Data
 * `qiime tools import`: This command imports data into Qiime2.
