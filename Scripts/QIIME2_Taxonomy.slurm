@@ -5,6 +5,7 @@
 #SBATCH --output=%j.output.taxonomy.txt
 #SBATCH --partition=all
 #SBATCH --time=02:00:00
+#SBATCH --mem=60G
 #SBATCH --mail-type=begin,end
 #SBATCH --mail-user=alex.kidangathazhe@gmail.com
 
