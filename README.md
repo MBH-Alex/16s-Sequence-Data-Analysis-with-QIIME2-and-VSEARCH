@@ -93,3 +93,45 @@ The denoising script is a crucial step in the Qiime2 workflow where raw sequence
 The `--p-trim-left-f`, `--p-trim-left-r`, `--p-trunc-len-f`, and `--p-trunc-len-r` must be changd before the script is run. By importing the `demux-paired-end.qzv` file in the Qiime2 View a quality report will be generated. The report will give a per base level of quality information that be used to set which bases will be trimmed based of the previous commands. The `--p-trim-left-f` corresponds to the left side of the forward reads while the `--p-trim-left-r` corresponds to the left side of the reverse reads. To ensure that the quality control succeded and did not trim too many reads take the `stats-dada2.qzv` off the cluster and import it into Qiime2 View. `rep-seqs.qzv` can also be taken off the cluster and viewed although generally there is no actual benifit in doing so. 
 #### Summary
 This step is essential for ensuring the accuracy and reliability of the downstream microbiome analyses by removing noise and correcting sequencing errors.
+### Assigning Taxonomy
+This script performs taxonomic classification of representative sequences using a pre-trained classifier, summarizes the results, and generates bar plots for visualization. It is a critical step in microbiome analysis to assign taxonomy to the observed features (ASVs) in your dataset.
+
+    #!/bin/bash
+    #SBATCH --job-name=QIIME2_taxonomy
+    #SBATCH --nodes=1
+    #SBATCH --ntasks-per-node=8
+    #SBATCH --output=%j.output.taxonomy.txt
+    #SBATCH --partition=all
+    #SBATCH --time=02:00:00
+    #SBATCH --mem=60G
+    #SBATCH --mail-type=begin,end
+    #SBATCH --mail-user=alex.kidangathazhe@gmail.com
+    
+    module load QIIME2/2021.8
+    
+    # Download classifier
+    wget https://data.qiime2.org/2024.2/common/silva-138-99-nb-classifier.qza
+    
+    # Classify sequences
+    qiime feature-classifier classify-sklearn \
+      --i-classifier silva-138-99-nb-classifier.qza \
+      --i-reads rep-seqs.qza \
+      --o-classification taxonomy.qza \
+      --p-n-jobs 8  # Use 8 threads for parallel processing
+    
+    # Summarize taxonomy
+    qiime metadata tabulate \
+      --m-input-file taxonomy.qza \
+      --o-visualization taxonomy.qzv
+    
+    # Create taxa bar plots
+    qiime taxa barplot \
+      --i-table table.qza \
+      --i-taxonomy taxonomy.qza \
+      --m-metadata-file REPLACE WITH YOUR METADATA FILE \
+      --o-visualization taxa-bar-plots.qzv
+#### Key Points
+* **Taxonomic Classification**: The script uses a pre-trained classifier to assign taxonomy to the representative sequences. This step is essential for understanding the microbial composition of the samples.
+* **Summary and Visualization**: The script generates a summary of the taxonomic classifications and creates bar plots to visualize the taxonomic composition, which can be reviewed using Qiime2 View (https://view.qiime2.org/).
+#### Further Actions:
+Take the `taxa-bar-plots.qzv` and `taxonomy.qzv` off the cluster and put them into the Qiime2 View to extract the taxonomic information. 
