@@ -73,12 +73,12 @@
 
 `2. taxonomy.qzv`
 * Description: This file is a visualization of the taxonomic classifications stored in taxonomy.qza. It is a Qiime2 visualization file that provides a summary of the taxonomic assignments.
-* Contents:
+Contents:
 * Tabulated Taxonomy: A table showing each feature (ASV) and its assigned taxonomy.
 * Interactive Visualization: Allows for exploration of the taxonomic assignments interactively.
 * Usage: View this file using Qiime2 View (https://view.qiime2.org/) to inspect and explore the taxonomic classifications. This helps in understanding which taxa are present in your samples and their relative abundances.
 `3. taxa-bar-plots.qzv`
 * Description: This file contains bar plots that visualize the taxonomic composition of the samples. It is a Qiime2 visualization file that provides a graphical representation of the taxa present in each sample.
-* Contents:
+Contents:
 * Bar Plots: Bar plots showing the relative abundance of different taxa across samples. The plots are interactive and can be filtered by taxonomic level and sample metadata.
 * Usage: View this file using Qiime2 View (https://view.qiime2.org/) to explore the taxonomic composition of your samples. This visualization helps in comparing the microbial communities between different samples or groups and identifying dominant taxa.
