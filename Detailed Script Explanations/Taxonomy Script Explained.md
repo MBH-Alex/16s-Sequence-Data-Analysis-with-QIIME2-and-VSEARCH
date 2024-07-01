@@ -66,3 +66,19 @@
 * `--i-taxonomy taxonomy.qza`: This specifies the input file containing the taxonomic classifications.
 * `--m-metadata-file REPLACE_WITH_YOUR_METADATA_FILE`: This specifies the metadata file that maps sample IDs to metadata categories. Replace REPLACE_WITH_YOUR_METADATA_FILE with the actual path to your metadata file.
 * `--o-visualization taxa-bar-plots.qzv`: This specifies the output file for the taxa bar plots visualization.
+### Explanation of Output Files
+`taxonomy.qza`
+* Description: This file contains the taxonomic classifications of the representative sequences. It is a Qiime2 artifact that stores the results of the taxonomy assignment process.
+* Usage: This file is used as input for generating visual summaries and bar plots. It can be further analyzed or visualized to understand the taxonomic composition of your samples.
+
+`2. taxonomy.qzv`
+* Description: This file is a visualization of the taxonomic classifications stored in taxonomy.qza. It is a Qiime2 visualization file that provides a summary of the taxonomic assignments.
+* Contents:
+* Tabulated Taxonomy: A table showing each feature (ASV) and its assigned taxonomy.
+* Interactive Visualization: Allows for exploration of the taxonomic assignments interactively.
+* Usage: View this file using Qiime2 View (https://view.qiime2.org/) to inspect and explore the taxonomic classifications. This helps in understanding which taxa are present in your samples and their relative abundances.
+`3. taxa-bar-plots.qzv`
+* Description: This file contains bar plots that visualize the taxonomic composition of the samples. It is a Qiime2 visualization file that provides a graphical representation of the taxa present in each sample.
+* Contents:
+* Bar Plots: Bar plots showing the relative abundance of different taxa across samples. The plots are interactive and can be filtered by taxonomic level and sample metadata.
+* Usage: View this file using Qiime2 View (https://view.qiime2.org/) to explore the taxonomic composition of your samples. This visualization helps in comparing the microbial communities between different samples or groups and identifying dominant taxa.
