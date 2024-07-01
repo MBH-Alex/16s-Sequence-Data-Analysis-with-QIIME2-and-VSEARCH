@@ -30,5 +30,5 @@ qiime metadata tabulate \
 qiime taxa barplot \
   --i-table table.qza \
   --i-taxonomy taxonomy.qza \
-  --m-metadata-file Metadata2.tsv \
+  --m-metadata-file REPLACE WITH YOUR METADATA FILE \
   --o-visualization taxa-bar-plots.qzv
