@@ -13,10 +13,10 @@ module load QIIME2/2021.8
 # Denoise paired-end sequences using DADA2
 qiime dada2 denoise-paired \
   --i-demultiplexed-seqs demux-paired-end.qza \
-  --p-trim-left-f 21 \
-  --p-trim-left-r 10 \
-  --p-trunc-len-f 295 \
-  --p-trunc-len-r 238 \
+  --p-trim-left-f REPLACE WITH YOUR TRIMMING PARAMETERS \
+  --p-trim-left-r REPLACE WITH YOUR TRIMMING PARAMETERS \
+  --p-trunc-len-f REPLACE WITH YOUR TRIMMING PARAMETERS \
+  --p-trunc-len-r REPLACE WITH YOUR TRIMMING PARAMETERS \
   --o-table table.qza \
   --o-representative-sequences rep-seqs.qza \
   --o-denoising-stats denoising-stats.qza \
