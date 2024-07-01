@@ -1,4 +1,4 @@
-## Detailed Explanation of the Import Script
+## Detailed Explanation of the Taxonomy Script
 
     #!/bin/bash
     #SBATCH --job-name=QIIME2_taxonomy
