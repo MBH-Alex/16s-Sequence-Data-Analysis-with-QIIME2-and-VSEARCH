@@ -135,3 +135,5 @@ This script performs taxonomic classification of representative sequences using 
 * **Summary and Visualization**: The script generates a summary of the taxonomic classifications and creates bar plots to visualize the taxonomic composition, which can be reviewed using Qiime2 View (https://view.qiime2.org/).
 #### Further Actions:
 Take the `taxa-bar-plots.qzv` and `taxonomy.qzv` off the cluster and put them into the Qiime2 View to extract the taxonomic information. 
+#### Summary
+This step provides insights into the microbial communities present in your samples by assigning taxonomic labels to the features and visualizing their distribution across samples.
