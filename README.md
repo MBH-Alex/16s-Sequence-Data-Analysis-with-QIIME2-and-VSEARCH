@@ -1,15 +1,15 @@
 # Comparing QIIME2 and VSEARCH
 Qiime2 and VSEARCH are both widely used tools in microbiome analysis of 16s sequence data. Qiime2 has quickly emerged as the foremost option for comprehensive analysis of sequence data against a reference databases like SILVA or Greengenes. VSEARCH on the other hand is a bit more niche but has (in my experience) demonstrated greater classification ability when working with a defined community. 
 
-1. Overview
+1. **Overview**
 
 | Feature | QIIME2 | VSEARCH |
 | ------- | ------ | ------- |
 | Primary Purpose |	A comprehensive microbiome analysis pipeline for data processing, analysis, and visualization |	A fast tool for sequence clustering, chimera detection, and searching against reference databases |
-Functionality	End-to-end workflow: importing, filtering, denoising, taxonomy assignment, diversity analysis	Sequence quality filtering, merging, dereplication, clustering, and chimera checking
-Ease of Use	Higher learning curve but well-documented	Command-line based, relatively simple for specific tasks
-Output	Feature tables, taxonomy assignments, diversity metrics, visualizations	OTU tables, cluster reports, chimera reports
-Computational Efficiency	More computationally intensive due to additional statistical analysis	Very fast, optimized for large datasets
+| Functionality |	End-to-end workflow: importing, filtering, denoising, taxonomy assignment, diversity analysis |	Sequence quality filtering, merging, dereplication, clustering, and chimera checking |
+| Ease of Use |	Higher learning curve but well-documented | Command-line based, relatively simple for specific tasks |
+| Output | Feature tables, taxonomy assignments, diversity metrics, visualizations | OTU tables, cluster reports, chimera reports |
+| Computational Efficiency | More computationally intensive due to additional statistical analysis | Very fast, optimized for large datasets |
 
 3. Key Functional Differences
 Feature	QIIME2	VSEARCH
