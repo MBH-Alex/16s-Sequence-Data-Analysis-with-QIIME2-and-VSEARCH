@@ -216,3 +216,70 @@ The Filtering and Dereplication script is crucial because it removes noise, corr
 Nothing special needs to be done at this step. 
 #### Summary
 This script fully prepares the samples to undergo OTU Clustering and Taxonomic Classification. 
+### OTU Clustering and Taxonomic Classification 
+This script combines all dereplicated samples and therefore does not not require the sample sheet anymore. It will then preform global dereplication, preclustering, de-novo chimera removal, reference based chimera removal, sequence extraction, OTU clustering, and Taxonomy assignment. 
+
+    #!/bin/bash
+    #SBATCH --job-name=Vsearch3
+    #SBATCH --nodes=1
+    #SBATCH --cpus-per-task=50
+    #SBATCH --mem=200G
+    #SBATCH --output=%j.output.Vsearch3
+    #SBATCH --partition=all
+    #SBATCH --time=8:00:00
+    #SBATCH --mail-user=alex.kidangathazhe@gmail.com
+    #SBATCH --mail-type=ALL
+    
+    cat *.derep.fasta > all.fasta
+    
+    echo Dereplicating across all sequences
+    
+    vsearch --derep_fulllength all.fasta --minuniquesize 2 --sizein --sizeout --fasta_width 0 --uc all.derep.uc --output all.derep.fasta
+    
+    echo Dereplication complete now preclustering
+    
+    vsearch --cluster_size all.derep.fasta --threads 40 --id 0.98 --strand plus --sizein --sizeout --fasta_width 0 --uc all.preclustered.uc --centroids all.preclustered.fasta
+    
+    echo Running chimera detection
+    
+    vsearch --uchime_denovo all.preclustered.fasta --sizein --sizeout --fasta_width 0 --nonchimeras all.denovo.nonchimeras.fasta 
+    
+    echo Running reference chimera detection
+    
+    vsearch --uchime_ref all.denovo.nonchimeras.fasta --threads 40 --db gold.fasta --sizein --sizeout --fasta_width 0 --nonchimeras all.ref.nonchimeras.fasta
+    
+    echo Extracting all non-chimeric, non-singleton, dereplicated sequences
+    
+    perl map.pl all.derep.fasta all.preclustered.uc all.ref.nonchimeras.fasta > all.nonchimeras.derep.fasta
+    
+    echo Extract all non-chimeric, non-singleton sequences in each sample 
+    
+    perl map.pl all.fasta all.derep.uc all.nonchimeras.derep.fasta > all.nonchimeras.fasta
+    
+    echo Creating OTU Table
+    
+    vsearch --cluster_size all.nonchimeras.fasta --threads 40 --id 0.97 --strand plus --sizein --sizeout --fasta_width 0 --uc all.clustered.uc --relabel OTU_ --centroids all.otus.fasta --otutabout all.otutab.txt
+    
+    echo OTU Table has been made and has been saved to all.otutab.txt
+    
+    echo Now Assigning Taxonomy
+    
+    vsearch -sintax all.otus.fasta -db gold.fasta -tabbedout tax_raw.txt -strand both -sintax_cutoff 0.5
+    
+    echo Taxonomy has been Assigned to tax_raw.txt
+    
+    echo The script has finished 
+    
+    echo Done
+#### Key Points:
+* **Merging** The script merges all dereplicated samples into a single fasta file.
+* **Global Dereplication** The script then preforms dereplication again to merge duplicate sequences across samples as well as remove singletons.
+* **Preclustering**: This will group sequences at 98% similarity (what ever it is set to).
+* **Chimera Removal**: The script then removes chimeric sequences using both de-novo and referenced based methods.
+* **Sequence Extraction**: The script will then extract the high quality filtered and non-chimeric sequences using map.pl.
+* **OTU Clustering**: The remaining sequences will be clustered at 97% identity and a OTU table will be generated.
+* **Taxonomy Assignment**: Taxonomy will also be assigned based on the provided custom database.
+#### Further Actions:
+It is suggested that the all.otutab.txt and tax_raw.txt files are taken of the cluster and processed using the provided R script to create a more usable table for figure generation and further analysis. 
+#### Summary:
+This script preforms the bulk of the analysis after concatonating all samples and therefore can not utilize the parallell computing potential of SLURM. 
