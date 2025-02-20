@@ -5,21 +5,21 @@ Qiime2 and VSEARCH are both widely used tools in microbiome analysis of 16s sequ
 
 | Feature | QIIME2 | VSEARCH |
 | ------- | ------ | ------- |
-| Primary Purpose |	A comprehensive microbiome analysis pipeline for data processing, analysis, and visualization |	A fast tool for sequence clustering, chimera detection, and searching against reference databases |
+| Primary Purpose |	A comprehensive microbiome analysis pipeline for data processing, analysis, and visualization |	A fast tool for sequence clustering, chimera detection, and searching against custom databases |
 | Functionality |	End-to-end workflow: importing, filtering, denoising, taxonomy assignment, diversity analysis |	Sequence quality filtering, merging, dereplication, clustering, and chimera checking |
-| Ease of Use |	Higher learning curve but well-documented | Command-line based, relatively simple for specific tasks |
 | Output | Feature tables, taxonomy assignments, diversity metrics, visualizations | OTU tables, cluster reports, chimera reports |
 | Computational Efficiency | More computationally intensive due to additional statistical analysis | Very fast, optimized for large datasets |
 
-3. Key Functional Differences
-Feature	QIIME2	VSEARCH
-Importing Data	Uses qiime tools import	Reads raw FASTQ/Fasta files directly
-Denoising (Error Correction)	Uses DADA2 or deblur to denoise reads and infer amplicon sequence variants (ASVs)	No denoising, but can filter low-quality reads
-OTU Clustering	No traditional OTU clustering, ASVs are preferred	Clusters sequences into OTUs based on similarity (e.g., 97% identity)
-Chimera Detection	Uses DADA2's built-in chimera filtering	Uses vsearch --uchime_denovo or --uchime_ref
-Taxonomy Assignment	Uses Naive Bayes classifier trained on reference databases (e.g., Greengenes, Silva)	Uses vsearch --usearch_global for taxonomy assignment by similarity
-Diversity Analysis	Computes α and β diversity metrics, phylogenetic trees	Not designed for diversity analysis
-Visualization	Generates .qzv files for interactive visualization using Qiime2 View	No built-in visualization tools
+2. **Key Functional Differences**
+| Feature | QIIME2 | VSEARCH |
+| ------- | ------ | ------- |
+| Importing Data | Uses qiime tools import | Reads raw FASTQ/Fasta files directly | 
+| Denoising (Error Correction) | Uses DADA2 or to denoise reads and infer amplicon sequence variants (ASVs) | No denoising, but can filter low-quality reads |
+| OTU Clustering | No traditional OTU clustering, ASVs are preferred | Clusters sequences into OTUs based on similarity (e.g., 97% identity) |
+| Chimera Detection | Uses DADA2's built-in chimera filtering | Uses vsearch --uchime_denovo or --uchime_ref |
+| Taxonomy Assignment | Uses Naive Bayes classifier trained on reference databases (e.g., Greengenes, Silva) | Uses vsearch --usearch_global a extremely good algorithm for classiying by similarity |
+| Diversity Analysis | Computes α and β diversity metrics, phylogenetic trees | Not designed for diversity analysis
+| Visualization | Generates .qzv files for interactive visualization using Qiime2 View | No built-in visualization tools |
 
 
 # QIIME2-Slurm-Protocol
