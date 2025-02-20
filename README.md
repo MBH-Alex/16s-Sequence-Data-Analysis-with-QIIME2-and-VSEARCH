@@ -137,3 +137,15 @@ This script performs taxonomic classification of representative sequences using 
 Take the `taxa-bar-plots.qzv` and `taxonomy.qzv` off the cluster and put them into the Qiime2 View to extract the taxonomic information. 
 #### Summary
 This step provides insights into the microbial communities present in your samples by assigning taxonomic labels to the features and visualizing their distribution across samples.
+
+# VSEARCH-SLURM-Protocol
+This pipeline outlines the steps to classify OTUs and assign Taxonomy using VSEARCH, on a SLURM a computing cluster. The worflow involves pair merging, quality control, dereplication, and chimera removal. This protocol only works for paired end seqeunce data and should be used to analyze defined communities. 
+## General Prerequisites
+This protocol is intended to be run on a SLURM based cluster, specifically the University of Oklahoma (OU) Schooner Cluster. As every cluster has its own quirks it should be understood that running this exact set of scripts in another SLURM based cluster may cause unexpected errors to occour. However, this protocol can generally be considered universal across all SLURM based clusters. The second prerequisite is the stable installation of VSEARCH prefferably as up to date as possible. The ideal method of installation is via the Anaconda package manager. Lastly, as this protocol is meant to be used on defined communities a custom database in a format acceptable to VSEARCH. 
+
+Before starting the analysis, ensure the following prerequisites are met:
+* **HPC Cluster Access**: Ensure you have access to a high-performance computing (HPC) cluster with SLURM job scheduler.
+* **VSEARCH Installation**: VSEARCH should be installed and properly configured on the HPC cluster. The recommended way to install VSEARCH is via the Anaconda distribution. For installation instructions, refer to the https://github.com/torognes/vsearch.
+* **Custom Database**: A custom database should be prepared that matches the defined community that is being analyzed.
+## Running the Protocol
+### Pair Merging and Quality Statistics
