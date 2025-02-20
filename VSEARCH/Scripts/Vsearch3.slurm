@@ -6,7 +6,7 @@
 #SBATCH --output=%j.output.Vsearch3
 #SBATCH --partition=all
 #SBATCH --time=8:00:00
-#SBATCH --mail-user=alex.kidangathazhe@gmail.com
+#SBATCH --mail-user=your email here
 #SBATCH --mail-type=ALL
 
 cat *.derep.fasta > all.fasta
