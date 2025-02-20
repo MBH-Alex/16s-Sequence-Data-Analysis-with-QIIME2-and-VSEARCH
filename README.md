@@ -283,3 +283,71 @@ This script combines all dereplicated samples and therefore does not not require
 It is suggested that the all.otutab.txt and tax_raw.txt files are taken of the cluster and processed using the provided R script to create a more usable table for figure generation and further analysis. 
 #### Summary:
 This script preforms the bulk of the analysis after concatonating all samples and therefore can not utilize the parallell computing potential of SLURM. 
+### Table Formatting (Optional)
+The R script below can be used to format the OTU table and Taxonomy table into a more usable format. 
+
+    library(data.table)
+    library(tidyverse)
+    library(dplyr)
+    library(stringr)
+    
+    Table <- fread("/Users/alexkid/Desktop/vsearch/all.otutab.txt")
+    Taxonomy <- read.delim("/Users/alexkid/Desktop/vsearch/ASV_tax_raw.txt", sep="\t", header=F)
+    Taxonomy$V1 = gsub(";.*","",Taxonomy$V1)
+    Taxonomy$V6 = lapply(Taxonomy$V1, gsub, pattern = "OTU_", replacement = "")
+    Taxonomy <- as.data.frame(Taxonomy)
+    Taxonomy$V6 <- unlist(Taxonomy$V6)
+    write.csv(Taxonomy, "/Users/alexkid/Desktop/vsearch/Taxonomy.csv", row.names = FALSE)
+    Taxonomy <- read.csv("/Users/alexkid/Desktop/vsearch/Taxonomy.csv")
+    names(Taxonomy)[1] <- 'OTU'
+    names(Taxonomy)[2] <- 'Taxonomy'
+    names(Taxonomy)[3] <- 'Useless'
+    names(Taxonomy)[4] <- 'Taxonomy2'
+    names(Taxonomy)[5] <- 'Useless2'
+    names(Taxonomy)[6] <- 'Sort'
+    Taxonomy <- Taxonomy[order(Taxonomy$Sort) , ]
+    
+    Taxonomy2 <- subset(Taxonomy, select=c("OTU", "Taxonomy"))
+    Taxonomy2$Taxonomy = gsub("([0-9].[0-9])","",Taxonomy2$Taxonomy)
+    Taxonomy2$Taxonomy = gsub("([0-9])","",Taxonomy2$Taxonomy)
+    Taxonomy2$Taxonomy <- gsub("[()]", "", Taxonomy2$Taxonomy)
+    Taxonomy2$Taxonomy = gsub("d:","",Taxonomy2$Taxonomy)
+    Taxonomy2$Taxonomy = gsub("c:","",Taxonomy2$Taxonomy)
+    Taxonomy2$Taxonomy = gsub("p:","",Taxonomy2$Taxonomy)
+    Taxonomy2$Taxonomy = gsub("o:","",Taxonomy2$Taxonomy)
+    Taxonomy2$Taxonomy = gsub("f:","",Taxonomy2$Taxonomy)
+    Taxonomy2$Taxonomy = gsub("g:","",Taxonomy2$Taxonomy)
+    Taxonomy2$Taxonomy = gsub("s:","",Taxonomy2$Taxonomy)
+    
+    Taxonomy3 <- as.data.frame(str_split_fixed(Taxonomy2$Taxonomy, ",", 7))
+    names(Taxonomy3)[1] <- 'Kingdom'
+    names(Taxonomy3)[2] <- 'Phylum'
+    names(Taxonomy3)[3] <- 'Class'
+    names(Taxonomy3)[4] <- 'Order'
+    names(Taxonomy3)[5] <- 'Family'
+    names(Taxonomy3)[6] <- 'Genus'
+    names(Taxonomy3)[7] <- 'Species'
+    
+    Taxonomy3$OTU = Taxonomy2$OTU
+    Taxonomy3 <- Taxonomy3 %>% relocate(OTU, .before = Kingdom)
+    names(Table)[1] <- 'OTU'
+    Table$Sort = lapply(Table$OTU, gsub, pattern = "OTU_", replacement = "")
+    Table <- as.data.frame(Table)
+    Table$Sort <- unlist(Table$Sort)
+    write.csv(Table, "/Users/alexkid/Desktop/vsearch/OTU_Table.csv", row.names = FALSE)
+    Table <- read.csv("/Users/alexkid/Desktop/vsearch/OTU_Table.csv")
+    Table <- Table[order(Table$Sort) , ]
+    
+    OTU_Table = Table
+    OTU_Table$OTU = Taxonomy3$Species
+    names(OTU_Table)[1] <- 'Species'
+    
+    OTU_Table2 <- OTU_Table %>% group_by(Species) %>% summarise_each(funs(max)) 
+#### Key Points
+* **Processes Raw OTU and Taxononmy Data**: This is done by extracting only the OTU ID and then saving it.
+* **Cleans Taxonomy Information**: This rmoves numerical values, special characters, and prefixes. It also splits it into hierarchial levels.
+* **Replaces OTU Identifiers with Species Name**: This merges the species names with the OTU IDs and then groups the abundance by species.
+#### Further Actions: 
+This formatted table can be used for figure generation and further analysis. 
+#### Summary:
+This script just generally formats the table into a more useful format. But is optional as the actual results have been generated for use already. 
