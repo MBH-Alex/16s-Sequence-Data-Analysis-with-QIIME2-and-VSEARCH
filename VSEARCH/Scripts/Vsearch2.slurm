@@ -7,7 +7,7 @@
 #SBATCH --partition=all
 #SBATCH --time=8:00:00
 #SBATCH --array=1-40
-#SBATCH --mail-user=alex.kidangathazhe@gmail.com
+#SBATCH --mail-user=your email here
 #SBATCH --mail-type=ALL
 
 samplesheet="read_list"
