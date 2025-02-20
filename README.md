@@ -41,7 +41,7 @@ The importing and demultiplexing script is the initial step in the Qiime2 workfl
 * **Demultiplexing**: If your data is multiplexed, this step would handle the separation of sequences by sample based on barcodes (not explicitly shown here as the data is assumed to be already demultiplexed).
 * **Quality Summary**: After importing, the script generates a summary of the demultiplexed data, providing insights into sequence quality, which can be reviewed using Qiime2 View (https://view.qiime2.org/).
 #### Further Actions
-Once this script has run it isi imperitive that the `demux-paired-end.qzv` file is taken off the cluster and then imported innto to Qiime2 View. This will allow for the determination of the base cutoffs during denoising.
+Once this script has run it is imperitive that the `demux-paired-end.qzv` file is taken off the cluster and then imported innto to Qiime2 View. This will allow for the determination of the base cutoffs during denoising.
 #### Summary
 This initial step sets the foundation for subsequent analyses by ensuring that the raw data is properly formatted and summarized, enabling informed decisions for downstream processing steps.
 ### Denoising the Samples
@@ -147,5 +147,38 @@ Before starting the analysis, ensure the following prerequisites are met:
 * **HPC Cluster Access**: Ensure you have access to a high-performance computing (HPC) cluster with SLURM job scheduler.
 * **VSEARCH Installation**: VSEARCH should be installed and properly configured on the HPC cluster. The recommended way to install VSEARCH is via the Anaconda distribution. For installation instructions, refer to the https://github.com/torognes/vsearch.
 * **Custom Database**: A custom database should be prepared that matches the defined community that is being analyzed.
+* **List of Samples**: A list of samples in the correct format should also be created (see example data for example).
 ## Running the Protocol
 ### Pair Merging and Quality Statistics
+The script below merges the paired and reads and extracts quality statistics that can be used to calibrate future stesps. This script operates as an array, so please make sure the numer of arrays is set to match the number of files that are put through the pipeline. 
+    #!/bin/bash
+    #SBATCH --job-name=Humman3
+    #SBATCH --nodes=1
+    #SBATCH --cpus-per-task=50
+    #SBATCH --mem=200G
+    #SBATCH --output=%j.output.Trinity
+    #SBATCH --partition=all
+    #SBATCH --time=8:00:00
+    #SBATCH --array=1-40
+    #SBATCH --mail-user=your email here
+    #SBATCH --mail-type=ALL
+    
+    samplesheet="read_list"
+    
+    name=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $3}')
+    file1=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $1}')
+    file2=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $2}')
+    file3=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $4}')
+    
+    
+    vsearch --fastq_mergepairs $file1 --threads 40 --reverse $file2 --fastq_minovlen 50 --fastq_maxdiffs 15 --fastqout $name.merged.fastq --fastq_eeout
+    
+    vsearch --fastq_eestats $file1 --output $name.stats
+#### Key Points
+* **Pair Merging**: The script merges/assembles the paired end reads
+* **Quality Summary**: The script creates a per sample quality summary.
+* **Sample List**: The Script reads from the samplesheet to assign slurm array ids to each task.
+#### Further Actions
+Make sure to look at some of the sample quality summaries to properly set the settings for quality filtering in the upcoming steps. 
+#### Summary
+This step reads samples from the samplesheets and proccess them using arrays to leverage slurm's parallell computing capability. It then merges the paired end reads and the generates quality summaries to prepare for upcoming filtering. 
