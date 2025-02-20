@@ -1,4 +1,4 @@
-# QIIME2-Slurm-Protocol-Scaria-Lab
+# QIIME2-Slurm-Protocol
 This protocol outlines the steps for conducting a comprehensive microbiome analysis using Qiime2, on a SLURM computing cluster. The workflow includes data import, quality control, feature table construction, phylogenetic analysis, diversity metrics computation, taxonomic classification, and optional differential abundance analysis using ANCOM. This protocol is optimized for processing paired-end sequence data.
 ## General Prerequisites
 This protocol is intended to be run on a SLURM based cluster, specifically the University of Oklahoma (OU) Schooner Cluster. As every cluster has its own quirks it should be understood that running this exact set of scripts in another SLURM based cluster may cause unexpected errors to occour. However, this protocol can generally be considered universal across all SLURM based clusters. 
