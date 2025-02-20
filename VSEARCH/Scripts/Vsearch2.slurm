@@ -3,7 +3,7 @@
 #SBATCH --nodes=1
 #SBATCH --cpus-per-task=50
 #SBATCH --mem=200G
-#SBATCH --output=%j.output.Trinity
+#SBATCH --output=%j.output.Vsearch3
 #SBATCH --partition=all
 #SBATCH --time=8:00:00
 #SBATCH --array=1-40
