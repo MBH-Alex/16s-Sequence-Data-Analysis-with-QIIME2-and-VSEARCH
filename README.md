@@ -11,6 +11,7 @@ Qiime2 and VSEARCH are both widely used tools in microbiome analysis of 16s sequ
 | Computational Efficiency | More computationally intensive due to additional statistical analysis | Very fast, optimized for large datasets |
 
 2. **Key Functional Differences**
+
 | Feature | QIIME2 | VSEARCH |
 | ------- | ------ | ------- |
 | Importing Data | Uses qiime tools import | Reads raw FASTQ/Fasta files directly | 
