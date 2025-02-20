@@ -2,6 +2,7 @@
 Qiime2 and VSEARCH are both widely used tools in microbiome analysis of 16s sequence data. Qiime2 has quickly emerged as the foremost option for comprehensive analysis of sequence data against a reference databases like SILVA or Greengenes. VSEARCH on the other hand is a bit more niche but has (in my experience) demonstrated greater classification ability when working with a defined community. 
 
 1. Overview
+
 | Feature | QIIME2 | VSEARCH |
 | ------- | ------ | ------- |
 | Primary Purpose |	A comprehensive microbiome analysis pipeline for data processing, analysis, and visualization |	A fast tool for sequence clustering, chimera detection, and searching against reference databases |
