@@ -153,11 +153,11 @@ Before starting the analysis, ensure the following prerequisites are met:
 The script below merges the paired and reads and extracts quality statistics that can be used to calibrate future stesps. This script operates as an array, so please make sure the numer of arrays is set to match the number of files that are put through the pipeline.
 
     #!/bin/bash
-    #SBATCH --job-name=Humman3
+    #SBATCH --job-name=Vserach1
     #SBATCH --nodes=1
     #SBATCH --cpus-per-task=50
     #SBATCH --mem=200G
-    #SBATCH --output=%j.output.Trinity
+    #SBATCH --output=%j.output.Vsearch1
     #SBATCH --partition=all
     #SBATCH --time=8:00:00
     #SBATCH --array=1-40
@@ -183,3 +183,36 @@ The script below merges the paired and reads and extracts quality statistics tha
 Make sure to look at some of the sample quality summaries to properly set the settings for quality filtering in the upcoming steps. 
 #### Summary
 This step reads samples from the samplesheets and proccess them using arrays to leverage slurm's parallell computing capability. It then merges the paired end reads and the generates quality summaries to prepare for upcoming filtering. 
+### Filtering and Per Sample Dereplication
+The Filtering and Dereplication script is crucial because it removes noise, correct errors, and generates high-quality samples for further use. 
+
+    #!/bin/bash
+    #SBATCH --job-name=Vsearch2
+    #SBATCH --nodes=1
+    #SBATCH --cpus-per-task=50
+    #SBATCH --mem=200G
+    #SBATCH --output=%j.output.Vserach2
+    #SBATCH --partition=all
+    #SBATCH --time=8:00:00
+    #SBATCH --array=1-40
+    #SBATCH --mail-user=your email here
+    #SBATCH --mail-type=ALL
+    
+    samplesheet="read_list"
+    
+    name=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $3}')
+    file1=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $1}')
+    file2=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $2}')
+    file3=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $4}')
+    file4=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $5}')
+    
+    vsearch --fastq_filter $file3 --fastq_maxee .5 --fastq_minlen 400 --fastq_maxlen 500 --fastq_maxns 0 --fastaout $name.filtered.fasta --fasta_width 0
+    
+    vsearch --derep_fulllength $file4 --strand plus --output $name.derep.fasta --sizeout --relabel $name. --fasta_width 0
+#### Key Points
+* **Filtering**: The script preforms quality filtering according to the given settings and returns a fasta file as a result.
+* **Dereplication**: The script also preforms per sample dereplication to ensure that duplicate sequences are merged to speed up classification down the line.
+#### Further Actions
+Nothing special needs to be done at this step. 
+#### Summary
+This script fully prepares the samples to undergo OTU Clustering and Taxonomic Classification. 
