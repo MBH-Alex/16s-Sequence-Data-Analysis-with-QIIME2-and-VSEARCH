@@ -1,3 +1,4 @@
+
 # Comparing QIIME2 and VSEARCH
 Qiime2 and VSEARCH are both widely used tools in microbiome analysis of 16s sequence data. Qiime2 has quickly emerged as the foremost option for comprehensive analysis of sequence data against a reference databases like SILVA or Greengenes. VSEARCH on the other hand is a bit more niche but has (in my experience) demonstrated greater classification ability when working with a defined community. 
 
@@ -22,6 +23,8 @@ Qiime2 and VSEARCH are both widely used tools in microbiome analysis of 16s sequ
 | Diversity Analysis | Computes α and β diversity metrics, phylogenetic trees | Not designed for diversity analysis
 | Visualization | Generates .qzv files for interactive visualization using Qiime2 View | No built-in visualization tools |
 
+3. **Personal Notes/Use Cases**
+Generally speaking Qiime2 will be able to preform adequate levels of classification and is what I use when I am using a reference database (I highly suggest SILVA). Qiime2 enjoys the advantage of prepackaged reference databases that are kept up to date as well as some the most comprehensive documentation I have seen for any open source bioinformatics software. VSEARCH shows remarable ability to cluster against a custom database which is extremely useful when analyzing defined communities, however it requires a specific format of reference database and I have not yet found a prepackaged up to date version of SILVA to use with VSEARCH. On the other hand this makes VSEARCH my personal choice for defined communities as I have stated previously. That being said VSEARCH has barebones documentation and lacks many of the quality of life features of Qiime2. I also believe that Qiime2 recently release support for VSEARCH's classification algorithm natively but I am yet to explore its preformance. 
 
 # QIIME2-Slurm-Protocol
 This protocol outlines the steps for conducting a comprehensive microbiome analysis using Qiime2, on a SLURM computing cluster. The workflow includes data import, quality control, feature table construction, phylogenetic analysis, diversity metrics computation, taxonomic classification, and optional differential abundance analysis using ANCOM. This protocol is optimized for processing paired-end sequence data.
