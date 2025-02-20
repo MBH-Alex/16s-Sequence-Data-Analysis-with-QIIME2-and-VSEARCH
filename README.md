@@ -150,7 +150,8 @@ Before starting the analysis, ensure the following prerequisites are met:
 * **List of Samples**: A list of samples in the correct format should also be created (see example data for example).
 ## Running the Protocol
 ### Pair Merging and Quality Statistics
-The script below merges the paired and reads and extracts quality statistics that can be used to calibrate future stesps. This script operates as an array, so please make sure the numer of arrays is set to match the number of files that are put through the pipeline. 
+The script below merges the paired and reads and extracts quality statistics that can be used to calibrate future stesps. This script operates as an array, so please make sure the numer of arrays is set to match the number of files that are put through the pipeline.
+
     #!/bin/bash
     #SBATCH --job-name=Humman3
     #SBATCH --nodes=1
