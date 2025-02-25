@@ -1,10 +1,3 @@
----
-Status: 
-tags:
-  - note
-Links: 
-Created: 2025-02-25T08:52:08
----
 ## Detailed Explanation of the Vsearch1 Script
 ---
 ``` shell
@@ -44,12 +37,12 @@ vsearch --derep_fulllength $file4 --strand plus --output $name.derep.fasta --siz
  - `#SBATCH --array=1-40`: This enables job array functionality, meaning 40 separate tasks will be executed in parallel (one for each sample). Each task is identified by `$SLURM_ARRAY_TASK_ID`, which ranges from `1` to `40`.
  - `#SBATCH --mail-user=your email here #SBATCH --mail-type=ALL`: Configures email notifications for all job status updates (start, completion, failure, etc.). The user must replace "your email here" with a valid email address.
  Important Notes: The resources being requested (CPUs and RAM and assigned to each of the array tasks so requesting to much will decrease the number of jobs running in parallel.
- 1. Activating VSEARCH
+ 2. Activating VSEARCH
 It is highly recommended that VSEARCH be run using a Conda or Mamba environment and most clusters the saftest choice is to activate the environment and then `sbatch` the SLURM script. 
 1. Sample Information
 - `samplesheet="read_list"`: Specifies the sample sheet file (`read_list`), which contains information about sample names and corresponding FASTQ files.
 - `name=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $3}') file1=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $1}') file2=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $2}') file3=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $4}') file4=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $5}')`:  Extracts the sample name and file paths from the sample sheet (`read_list`). Uses `sed -n "$SLURM_ARRAY_TASK_ID"p` to fetch the line corresponding to the current array job. Uses `awk` to extract specific columns: `{print $1} → Forward read file`. `{print $2} → Reverse read file`. `{print $3} → Sample Name.` `{print $4} → Merged File`.  `{print $5} → Dereplicated/Filtered sequence file (file4)`.
-1. Quality Filtering of Samples
+3. Quality Filtering of Samples
 - `vsearch --fastq_filter $file3 --fastq_maxee .5 --fastq_minlen 400 --fastq_maxlen 500 --fastq_maxns 0 --fastaout $name.filtered.fasta --fasta_width 0`: Filters raw sequences from `$file3` based on quality and length criteria.
 	- `--fastq_filter $file3` → Specifies the input FASTQ file (filtered sequences).
 	- `--fastq_maxee .5` → Sets the maximum expected error rate to 0.5 (low-error reads only).
@@ -58,7 +51,7 @@ It is highly recommended that VSEARCH be run using a Conda or Mamba environment 
 	- `--fastq_maxns 0` → Removes reads containing any ambiguous (N) bases.
 	- `--fastaout $name.filtered.fasta` → Outputs the filtered sequences in FASTA format.
 	- `--fasta_width 0` → Writes sequences in single-line format for better readability.
-1. Dereplication of Sequences
+4. Dereplication of Sequences
 - `vsearch --derep_fulllength $file4 --strand plus --output $name.derep.fasta --sizeout --relabel $name. --fasta_width 0`: Dereplicates sequences, meaning identical sequences are collapsed into a single entry.
 	-  `--derep_fulllength $file4` → Reads sequences from `$file4` and performs full-length dereplication.
 	- `--strand plus` → Considers only the forward strand for deduplication.
