@@ -48,7 +48,7 @@
 * `#SBATCH --partition=all`: This sets the partition (queue) to "all".
 * `#SBATCH --time=04:00:00`: This sets the maximum run time to 4 hours.
 * `#SBATCH --mail-type=begin,end`: This configures email notifications to be sent at the beginning and end of the job.
-* `#SBATCH --mail-user=alex.kidangathazhe@gmail.com`: This specifies the email address to send notifications to.
+* `#SBATCH --mail-user=`: This specifies the email address to send notifications to.
 2. Load Qiime2 Module
 * `module load QIIME2/2021.8`: This line loads the Qiime2 module, making Qiime2 commands available for use.
 3. Denoising with DADA2
