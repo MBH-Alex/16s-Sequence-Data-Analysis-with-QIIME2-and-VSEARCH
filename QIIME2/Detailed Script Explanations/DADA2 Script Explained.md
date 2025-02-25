@@ -8,7 +8,7 @@
     #SBATCH --partition=all
     #SBATCH --time=04:00:00
     #SBATCH --mail-type=begin,end
-    #SBATCH --mail-user=alex.kidangathazhe@gmail.com
+    #SBATCH --mail-user=YOUR EMAIL HERE
     
     module load QIIME2/2021.8
     
