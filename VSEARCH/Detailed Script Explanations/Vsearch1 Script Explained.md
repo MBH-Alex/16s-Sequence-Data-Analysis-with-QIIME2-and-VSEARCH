@@ -37,12 +37,12 @@ vsearch --fastq_eestats $file1 --output $name.stats
  - `#SBATCH --array=1-40`: This enables job array functionality, meaning 40 separate tasks will be executed in parallel (one for each sample). Each task is identified by `$SLURM_ARRAY_TASK_ID`, which ranges from `1` to `40`.
  - `#SBATCH --mail-user=your email here #SBATCH --mail-type=ALL`: Configures email notifications for all job status updates (start, completion, failure, etc.). The user must replace "your email here" with a valid email address.
  Important Notes: The resources being requested (CPUs and RAM and assigned to each of the array tasks so requesting to much will decrease the number of jobs running in parallel.
- 1. Activating VSEARCH
+2. Activating VSEARCH
 It is highly recommended that VSEARCH be run using a Conda or Mamba environment and most clusters the saftest choice is to activate the environment and then `sbatch` the SLURM script. 
-1. Sample Information
+3. Sample Information
 - `samplesheet="read_list"`: Specifies the sample sheet file (`read_list`), which contains information about sample names and corresponding FASTQ files.
 - `name=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $3}') file1=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $1}') file2=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $2}') file3=$(sed -n "$SLURM_ARRAY_TASK_ID"p $samplesheet |  awk '{print $4}')`:  Extracts the sample name and file paths from the sample sheet (`read_list`). Uses `sed -n "$SLURM_ARRAY_TASK_ID"p` to fetch the line corresponding to the current array job. Uses `awk` to extract specific columns: `{print $1} → Forward read file`. `{print $2} → Reverse read file`. `{print $3} → Sample Name.` `{print $4} → Merged File`.
-1. Merge Paired-End Reads
+4. Merge Paired-End Reads
 - `vsearch --fastq_mergepairs $file1 --threads 40 --reverse $file2 --fastq_minovlen 50 --fastq_maxdiffs 15 --fastqout $name.merged.fastq --fastq_eeout`: Uses VSEARCH to merge paired-end reads from `file1` (forward reads) and `file2` (reverse reads).
 	- `--fastq_mergepairs $file1`: Specifies the forward read file.
 	- - `--reverse $file2` → Specifies the reverse read file.
@@ -51,12 +51,12 @@ It is highly recommended that VSEARCH be run using a Conda or Mamba environment 
 	- `--fastq_maxdiffs 15` → Allows up to 15 mismatches in the overlapping region.
 	- `--fastqout $name.merged.fastq` → Saves the merged reads to an output FASTQ file named after the sample (`$name.merged.fastq`).
 	- `--fastq_eeout` → Outputs the expected error rates for quality filtering.
-1. Computing Quality Statistics
+5. Computing Quality Statistics
 - `vsearch --fastq_eestats $file1 --output $name.stats`: Uses VSEARCH to calculate expected error statistics for file1 (forward reads).
 	- `--fastq_eestats $file1` → Runs error statistics on the forward reads.
 	- `--output $name.stats` → Saves the output to a statistics file (`$name.stats`).
-### General Comments & Considerations
 
+### General Comments & Considerations
 1. **Job Parallelization**:
     - The script is designed to process **40 different samples** in parallel using a SLURM job array.
     - Each task **reads a different line** from `read_list` and processes a separate sample.
