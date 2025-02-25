@@ -1,10 +1,3 @@
----
-Status: 
-tags:
-  - note
-Links: 
-Created: 2025-02-25T08:09:20
----
 ## Detailed Explanation of the Vsearch1 Script
 ---
 ``` shell
