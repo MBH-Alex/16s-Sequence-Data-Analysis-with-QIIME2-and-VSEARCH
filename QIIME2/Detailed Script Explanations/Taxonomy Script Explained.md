@@ -9,7 +9,7 @@
     #SBATCH --time=02:00:00
     #SBATCH --mem=60G
     #SBATCH --mail-type=begin,end
-    #SBATCH --mail-user=alex.kidangathazhe@gmail.com
+    #SBATCH --mail-user=YOUR EMAIL HERE
     
     module load QIIME2/2021.8
     
